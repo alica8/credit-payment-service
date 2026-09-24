@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Credit Ledger · Admin</title>
+    <link rel="stylesheet" href="/admin/style.css" />
+    <script src="/admin/app.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <div>
+        <span class="eyebrow">PAYMENT OPERATIONS</span>
+        <h1>Credit Ledger</h1>
+        <p>Accounts, activity and credit usage.</p>
+      </div>
+      <a href="/docs">API documentation ↗</a>
+    </header>
+    <main>
+      <section class="connection">
+        <label
+          >Administrative API key<input
+            id="apiKey"
+            type="password"
+            autocomplete="off"
+            placeholder="Enter your API key" /></label
+        ><button id="connect">Connect</button><span id="connectionState">Not connected</span>
+      </section>
+      <div id="notice" role="status" aria-live="polite"></div>
+      <section>
+        <div class="section-title">
+          <h2>Overview</h2>
+          <span>UTC · start inclusive, end exclusive</span>
+        </div>
+        <form id="reportForm" class="filters">
+          <label
+            >Group by<select id="period">
+              <option value="day">Daily</option>
+              <option value="month">Monthly</option>
+              <option value="year">Yearly</option>
+            </select></label
+          ><label>From (UTC)<input id="from" type="datetime-local" required /></label
+          ><label>To (UTC)<input id="to" type="datetime-local" required /></label
+          ><button>Refresh reports</button>
+        </form>
+        <div class="metrics">
+          <article><span>Total credits</span><strong id="totalCredits">—</strong></article>
+          <article><span>Total debits</span><strong id="totalDebits">—</strong></article>
+          <article><span>Net movement</span><strong id="netMovement">—</strong></article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Period (UTC)</th>
+                <th>Credits</th>
+                <th>Debits</th>
+              </tr>
+            </thead>
+            <tbody id="reportRows">
+              <tr>
+                <td colspan="3">Connect to load reports.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <div class="columns">
+        <section>
+          <div class="section-title">
+            <h2>Accounts</h2>
+            <span id="userCount"></span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Balance</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="userRows"></tbody>
+            </table>
+          </div>
+          <div class="pagination">
+            <button id="prevUsers">Previous</button><span id="userPage">Page 1</span
+            ><button id="nextUsers">Next</button>
+          </div>
+        </section>
+        <section>
+          <h2>Account details</h2>
+          <p id="selectedUser">Select an account to inspect its activity.</p>
+          <div id="usage" class="usage"></div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Time (UTC)</th>
+                  <th>Type</th>
+                  <th>Amount</th>
+                  <th>Reference</th>
+                </tr>
+              </thead>
+              <tbody id="transactionRows"></tbody>
+            </table>
+          </div>
+          <div class="pagination">
+            <button id="prevTransactions">Previous</button><span id="transactionPage">Page 1</span
+            ><button id="nextTransactions">Next</button>
+          </div>
+        </section>
+      </div>
+      <section>
+        <h2>Inspect payment</h2>
+        <form id="paymentForm" class="filters">
+          <label>Payment ID<input id="paymentId" placeholder="UUID" required /></label
+          ><button>Load payment</button>
+        </form>
+        <pre id="paymentResult">Enter an ID to inspect status and event history.</pre>
+        <div class="pagination">
+          <button id="prevEvents">Previous events</button><span id="eventPage">Page 1</span
+          ><button id="nextEvents">Next events</button>
+        </div>
+      </section>
+    </main>
+    <footer>Credit amounts use integer units. API key is held in memory only.</footer>
+  </body>
+</html>
