@@ -132,7 +132,3 @@ In another terminal in this directory: `npm run worker:dev`. Do not run a second
 - Redis provides rate limiting (120 authorized requests/minute/IP). It fails open during Redis outages; money correctness does not depend on Redis. `/readyz` reports Redis degradation but returns 200 if PostgreSQL is ready. It does not assert Worker health.
 - Versions are locked in `package-lock.json`; Prisma 6.19 uses `prisma-client-js` and schema-based connection configuration. Do not mix in Prisma 7+ setup instructions without migrating the project.
 - `npm run format:check` checks code formatting; `npm run format` applies it. Security overrides pin patched transitive versions of multer, deepmerge-ts and effect; migration/build/integration tests validate compatibility.
-
-## شروع سریع فارسی
-
-Docker Desktop را اجرا کنید، فایل `.env.example` را به `.env` کپی کنید و دستورهای بخش Quick start را بزنید. پنل در `/admin/` و مستندات قابل آزمایش در `/docs` هستند. کلید نمونه را از همین README وارد کنید. مثال‌های بالا برای پرداخت و شارژ قابل اجرا هستند؛ مبلغ را رشتهٔ عدد صحیح بفرستید، مثل `"300"`.
